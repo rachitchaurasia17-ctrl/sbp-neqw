@@ -99,8 +99,11 @@ export default function ProjectsSection() {
               transition={{ duration: 0.6, ease: [0.4, 0, 0.2, 1] }}
               className="absolute inset-0 flex flex-col md:flex-row"
             >
-              {/* Image half */}
-              <div className="relative w-full md:w-[55%] lg:w-[60%] h-[55%] sm:h-[50%] md:h-full shrink-0">
+              {/* Image half — tappable on mobile to open project */}
+              <div
+                className="relative w-full md:w-[55%] lg:w-[60%] h-[55%] sm:h-[50%] md:h-full shrink-0 cursor-pointer md:cursor-default"
+                onClick={() => open(current.slug)}
+              >
                 <img src={current.cover} alt={current.name} className="w-full h-full object-cover" />
                 <div className="absolute inset-0 md:hidden" style={{ background: 'linear-gradient(to bottom, transparent 40%, rgba(8,5,4,1) 100%)' }} />
                 <div className="absolute inset-0 hidden md:block" style={{ background: 'linear-gradient(to right, transparent 50%, rgba(8,5,4,1) 100%)' }} />
