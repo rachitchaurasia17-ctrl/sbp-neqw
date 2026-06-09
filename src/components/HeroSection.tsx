@@ -1,9 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import AnimatedHeading from './AnimatedHeading';
 import FadeIn from './FadeIn';
 import MobileMenu from './MobileMenu';
+import { Canvas } from '@react-three/fiber';
+import Hero3DOverlay from './canvas/Hero3DOverlay';
 
 // Anchor links scroll within the home page; route links open category pages.
 const ROUTE_LINKS = [
@@ -111,6 +113,13 @@ export default function HeroSection() {
           webkit-playsinline="true"
         />
       </motion.div>
+      <div className="absolute inset-0 z-[1] pointer-events-none">
+        <Suspense fallback={null}>
+          <Canvas camera={{ position: [0, 0, 5], fov: 45 }}>
+            <Hero3DOverlay />
+          </Canvas>
+        </Suspense>
+      </div>
       {/* Readability scrims — keep hero text high-contrast over any footage */}
       {/* vertical: darken nav top + hero text bottom */}
       <div
