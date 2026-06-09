@@ -54,7 +54,7 @@ export default function ChatBot() {
         onClick={() => setOpen((o) => !o)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        aria-label="Open Rachit AI"
+        aria-label="Open SBP AI"
         className="!fixed bottom-5 right-5 z-[90] flex items-center gap-2.5 rounded-full pl-4 pr-5 py-3 shadow-2xl text-[var(--bg)] font-semibold tracking-wide"
         style={{
           background: 'linear-gradient(135deg, #e6c98c 0%, #c9a14a 100%)',
@@ -62,7 +62,7 @@ export default function ChatBot() {
         }}
       >
         {open ? <X className="w-5 h-5" /> : <Sparkles className="w-5 h-5" />}
-        <span className="text-sm">Rachit AI</span>
+        <span className="text-sm">SBP AI</span>
       </motion.button>
 
       <AnimatePresence>
@@ -80,7 +80,7 @@ export default function ChatBot() {
                 <Sparkles className="w-5 h-5 text-[var(--gold-soft)]" />
               </div>
               <div className="flex-1">
-                <div className="font-display text-xl leading-none text-[var(--ivory)]">Rachit AI</div>
+                <div className="font-display text-xl leading-none text-[var(--ivory)]">SBP AI</div>
                 <div className="text-[11px] text-[var(--muted)] mt-1 flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   SBP Property &amp; Builder Advisor
@@ -173,7 +173,7 @@ export default function ChatBot() {
                 </button>
               </div>
               <div className="text-[10px] text-[var(--muted)] text-center mt-2">
-                Rachit AI can make mistakes — confirm details on a site visit.
+                SBP AI can make mistakes — confirm details on a site visit.
               </div>
             </div>
           </motion.div>

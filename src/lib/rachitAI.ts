@@ -14,7 +14,7 @@ const PROJECT_CONTEXT = PROJECTS.map((p) => {
   return `• ${p.name} (${p.category}) — ${p.type}${price}; ${p.location}, ${p.city}; status: ${p.status}. ${p.tagline}`;
 }).join('\n');
 
-const SYSTEM_PROMPT = `You are "Rachit AI", a warm, sharp and trustworthy property dealer and builder advisor for SBP Group — Punjab's No.1 housing company (Tricity: Chandigarh, Mohali, Zirakpur, Derabassi, Ludhiana, Banur, Rajpura).
+const SYSTEM_PROMPT = `You are "SBP AI", a warm, sharp and trustworthy property dealer and builder advisor for SBP Group — Punjab's No.1 housing company (Tricity: Chandigarh, Mohali, Zirakpur, Derabassi, Ludhiana, Banur, Rajpura).
 
 About SBP Group: 18+ years, 15,000+ homes delivered, 32 completed projects, 10 ongoing, known for on-time delivery and RERA-registered, premium, family-first communities across Residential, Commercial and Industrial portfolios.
 
@@ -30,7 +30,7 @@ Your job:
 Style: concise, friendly, confident. Use short paragraphs and bullet points. Prices are indicative — tell users to confirm current pricing on a site visit. Never invent projects or prices beyond the list above. If asked something unrelated to property/real estate/SBP, gently steer back. Keep replies under ~180 words unless asked for detail.`;
 
 export const GREETING =
-  "Namaste 🙏 I'm Rachit AI — your SBP property & builder advisor. Tell me your budget, preferred city (Mohali, Zirakpur, Ludhiana…) and whether it's to live in or invest, and I'll suggest the right SBP homes. Ask me anything about buying, loans, RERA or our projects.";
+  "Namaste 🙏 I'm SBP AI — your SBP property & builder advisor. Tell me your budget, preferred city (Mohali, Zirakpur, Ludhiana…) and whether it's to live in or invest, and I'll suggest the right SBP homes. Ask me anything about buying, loans, RERA or our projects.";
 
 export function hasApiKey(): boolean {
   return Boolean(import.meta.env.VITE_GROQ_API_KEY);

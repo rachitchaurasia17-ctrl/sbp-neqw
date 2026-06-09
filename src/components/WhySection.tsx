@@ -10,12 +10,23 @@ const FEATURES = [
   { icon: Leaf, t: 'Research-Driven', d: 'Every decision backed by deep, current market insight.' },
 ];
 
+/* Each card gets a unique float rhythm — like driftwood on water */
+const floatVariants = [
+  { y: [0, -14, -4, -16, 0], rotate: [0, 0.8, -0.5, 0.6, 0], dur: 5.2 },
+  { y: [0, -10, -18, -6, 0], rotate: [0, -0.6, 0.7, -0.4, 0], dur: 6.0 },
+  { y: [0, -16, -8, -14, 0], rotate: [0, 0.5, -0.8, 0.3, 0], dur: 5.6 },
+  { y: [0, -12, -20, -10, 0], rotate: [0, -0.7, 0.5, -0.6, 0], dur: 6.4 },
+  { y: [0, -18, -6, -12, 0], rotate: [0, 0.6, -0.4, 0.7, 0], dur: 5.0 },
+  { y: [0, -8, -16, -10, 0], rotate: [0, -0.5, 0.6, -0.3, 0], dur: 5.8 },
+];
+
 export default function WhySection() {
   return (
-    <section className="relative border-t border-white/5 py-20 md:py-28 px-6 md:px-12 lg:px-16 overflow-hidden"
+    <section
+      className="relative border-t border-white/5 py-20 md:py-28 px-5 md:px-12 lg:px-16 overflow-hidden"
       style={{ background: 'linear-gradient(180deg, #080604 0%, #0d0a06 50%, #080604 100%)' }}
     >
-      {/* Ambient gold glow — large soft circles */}
+      {/* Ambient gold glow */}
       <div
         className="absolute rounded-full pointer-events-none"
         style={{
@@ -36,7 +47,7 @@ export default function WhySection() {
       />
 
       <div className="relative max-w-[1400px] mx-auto">
-        <div className="grid lg:grid-cols-12 gap-12 lg:gap-16">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16">
 
           {/* ── Left Column ── */}
           <div className="lg:col-span-5 flex flex-col justify-between gap-10">
@@ -53,13 +64,13 @@ export default function WhySection() {
                 </span>
               </div>
               <h2
-                className="font-display text-4xl md:text-5xl lg:text-[3.5rem] font-light leading-[1.1] text-white mb-6"
+                className="font-display text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-light leading-[1.1] text-white mb-6"
                 style={{ letterSpacing: '-0.02em' }}
               >
                 Six reasons clients{' '}
                 <span className="italic" style={{ color: '#c9a14a' }}>choose SBP.</span>
               </h2>
-              <p className="text-lg leading-relaxed max-w-md" style={{ color: 'rgba(255,255,255,0.6)' }}>
+              <p className="text-base sm:text-lg leading-relaxed max-w-md" style={{ color: 'rgba(255,255,255,0.6)' }}>
                 Global standards, local mastery and a zero‑compromise ethic — the difference shows in everything we touch.
               </p>
             </motion.div>
@@ -78,80 +89,100 @@ export default function WhySection() {
             >
               <img src="/projects/cityofdream.avif" alt="SBP Group Lifestyle" className="w-full h-full object-cover" />
               <div className="absolute inset-0" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 50%, transparent 100%)' }} />
-              <div className="absolute bottom-0 left-0 p-8">
+              <div className="absolute bottom-0 left-0 p-6 sm:p-8">
                 <div className="text-[10px] tracking-[0.3em] uppercase mb-2" style={{ color: '#c9a14a' }}>
                   PUNJAB · SINCE 2007
                 </div>
-                <div className="text-xl text-white font-medium">Built to a higher standard</div>
+                <div className="text-lg sm:text-xl text-white font-medium">Built to a higher standard</div>
               </div>
             </motion.div>
           </div>
 
           {/* ── Right Column — Feature Cards ── */}
           <div className="lg:col-span-7">
-            <div className="grid sm:grid-cols-2 gap-5 md:gap-6 h-full">
-              {FEATURES.map((f, i) => (
-                <motion.div
-                  key={f.t}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: '-50px' }}
-                  transition={{ duration: 0.6, delay: (i % 6) * 0.08 }}
-                  className="h-full"
-                >
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-6 h-full">
+              {FEATURES.map((f, i) => {
+                const fv = floatVariants[i];
+                return (
                   <motion.div
-                    animate={{ y: [0, -8, 0] }}
-                    transition={{ duration: 4 + (i % 3) * 0.6, repeat: Infinity, ease: 'easeInOut', delay: i * 0.3 }}
-                    className="group relative h-full rounded-2xl p-7 md:p-8 transition-all duration-500 cursor-default"
-                    style={{
-                      background: 'linear-gradient(165deg, rgba(201,161,74,0.08) 0%, rgba(30,24,14,0.5) 40%, rgba(15,12,8,0.7) 100%)',
-                      border: '1px solid rgba(201,161,74,0.25)',
-                      boxShadow: '0 4px 30px rgba(0,0,0,0.4), inset 0 1px 0 rgba(201,161,74,0.15)',
-                    }}
-                    whileHover={{
-                      borderColor: 'rgba(201,161,74,0.55)',
-                      boxShadow: '0 8px 40px rgba(201,161,74,0.15), 0 0 60px rgba(201,161,74,0.08), inset 0 1px 0 rgba(201,161,74,0.3)',
-                    }}
+                    key={f.t}
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-50px' }}
+                    transition={{ duration: 0.6, delay: i * 0.08 }}
+                    className="h-full"
                   >
-                    {/* Top accent line */}
-                    <div
-                      className="absolute top-0 left-6 right-6 h-[1px]"
-                      style={{ background: 'linear-gradient(90deg, transparent, rgba(201,161,74,0.5), transparent)' }}
-                    />
-                    {/* Number */}
-                    <div
-                      className="absolute top-5 right-6 text-xs font-serif italic transition-colors duration-500"
-                      style={{ color: 'rgba(201,161,74,0.25)' }}
-                    >
-                      {String(i + 1).padStart(2, '0')}
-                    </div>
-                    {/* Icon */}
-                    <div
-                      className="w-12 h-12 mb-5 rounded-full flex items-center justify-center transition-all duration-500"
+                    <motion.div
+                      animate={{
+                        y: fv.y,
+                        rotate: fv.rotate,
+                        boxShadow: [
+                          '0 4px 30px rgba(0,0,0,0.4), 0 0 0px rgba(201,161,74,0)',
+                          '0 20px 50px rgba(0,0,0,0.5), 0 0 30px rgba(201,161,74,0.1)',
+                          '0 10px 35px rgba(0,0,0,0.45), 0 0 15px rgba(201,161,74,0.06)',
+                          '0 22px 55px rgba(0,0,0,0.5), 0 0 35px rgba(201,161,74,0.12)',
+                          '0 4px 30px rgba(0,0,0,0.4), 0 0 0px rgba(201,161,74,0)',
+                        ],
+                      }}
+                      transition={{
+                        duration: fv.dur,
+                        repeat: Infinity,
+                        ease: 'easeInOut',
+                        delay: i * 0.4,
+                      }}
+                      className="group relative h-full rounded-2xl p-7 md:p-8 cursor-default"
                       style={{
-                        border: '1px solid rgba(201,161,74,0.35)',
-                        background: 'rgba(201,161,74,0.1)',
-                        boxShadow: '0 0 20px rgba(201,161,74,0.08)',
+                        background: 'linear-gradient(165deg, rgba(201,161,74,0.1) 0%, rgba(30,24,14,0.55) 40%, rgba(15,12,8,0.75) 100%)',
+                        border: '1px solid rgba(201,161,74,0.25)',
+                        transformOrigin: 'center center',
+                      }}
+                      whileHover={{
+                        scale: 1.03,
+                        borderColor: 'rgba(201,161,74,0.6)',
+                        boxShadow: '0 25px 60px rgba(0,0,0,0.5), 0 0 50px rgba(201,161,74,0.18)',
                       }}
                     >
-                      <f.icon
-                        className="w-5 h-5 group-hover:scale-110 transition-transform duration-500"
-                        style={{ color: '#c9a14a' }}
-                        strokeWidth={1.5}
+                      {/* Top accent line */}
+                      <div
+                        className="absolute top-0 left-6 right-6 h-[1px]"
+                        style={{ background: 'linear-gradient(90deg, transparent, rgba(201,161,74,0.5), transparent)' }}
                       />
-                    </div>
-                    <h3
-                      className="font-display text-[1.35rem] md:text-2xl font-light mb-2 text-white"
-                      style={{ letterSpacing: '-0.01em' }}
-                    >
-                      {f.t}
-                    </h3>
-                    <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>
-                      {f.d}
-                    </p>
+                      {/* Bottom reflection shimmer */}
+                      <div
+                        className="absolute bottom-0 left-4 right-4 h-[1px]"
+                        style={{ background: 'linear-gradient(90deg, transparent, rgba(201,161,74,0.15), transparent)' }}
+                      />
+                      {/* Number */}
+                      <div
+                        className="absolute top-5 right-6 text-xs font-serif italic"
+                        style={{ color: 'rgba(201,161,74,0.3)' }}
+                      >
+                        {String(i + 1).padStart(2, '0')}
+                      </div>
+                      {/* Icon */}
+                      <div
+                        className="w-12 h-12 mb-5 rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500"
+                        style={{
+                          border: '1px solid rgba(201,161,74,0.4)',
+                          background: 'rgba(201,161,74,0.12)',
+                          boxShadow: '0 0 20px rgba(201,161,74,0.1)',
+                        }}
+                      >
+                        <f.icon className="w-5 h-5" style={{ color: '#c9a14a' }} strokeWidth={1.5} />
+                      </div>
+                      <h3
+                        className="font-display text-xl sm:text-2xl font-light mb-2 text-white"
+                        style={{ letterSpacing: '-0.01em' }}
+                      >
+                        {f.t}
+                      </h3>
+                      <p className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.55)' }}>
+                        {f.d}
+                      </p>
+                    </motion.div>
                   </motion.div>
-                </motion.div>
-              ))}
+                );
+              })}
             </div>
           </div>
 
