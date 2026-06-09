@@ -52,22 +52,28 @@ export default function WhySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-50px' }}
               transition={{ duration: 0.6, delay: (i % 3) * 0.1 }}
-              className="group rounded-2xl p-8 md:p-10 border border-[rgba(201,161,74,0.18)] transition-all duration-500 hover:border-[rgba(201,161,74,0.45)] hover:-translate-y-1"
-              style={{
-                background:
-                  'linear-gradient(155deg, rgba(40,29,13,0.55) 0%, rgba(24,18,10,0.6) 55%, rgba(17,12,6,0.65) 100%)',
-              }}
+              className="h-full"
             >
-              <div className="w-12 h-12 mb-6 rounded-full flex items-center justify-center border border-[rgba(201,161,74,0.3)] bg-[rgba(201,161,74,0.08)]">
-                <f.icon
-                  className="w-5 h-5 text-[var(--gold-soft)] group-hover:scale-110 transition-transform duration-500"
-                  strokeWidth={1.5}
-                />
-              </div>
-              <h3 className="font-display text-2xl md:text-3xl font-light mb-2 text-[var(--ivory)]" style={{ letterSpacing: '-0.02em' }}>
-                {f.t}
-              </h3>
-              <p className="text-sm text-[var(--muted)] leading-relaxed">{f.d}</p>
+              <motion.div
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 4 + (i % 2), repeat: Infinity, ease: "easeInOut", delay: i * 0.2 }}
+                className="group h-full rounded-2xl p-8 md:p-10 border border-[rgba(201,161,74,0.18)] transition-all duration-500 hover:border-[rgba(201,161,74,0.45)] hover:shadow-[0_15px_30px_-15px_rgba(201,161,74,0.2)]"
+                style={{
+                  background:
+                    'linear-gradient(155deg, rgba(40,29,13,0.55) 0%, rgba(24,18,10,0.6) 55%, rgba(17,12,6,0.65) 100%)',
+                }}
+              >
+                <div className="w-12 h-12 mb-6 rounded-full flex items-center justify-center border border-[rgba(201,161,74,0.3)] bg-[rgba(201,161,74,0.08)]">
+                  <f.icon
+                    className="w-5 h-5 text-[var(--gold-soft)] group-hover:scale-110 transition-transform duration-500"
+                    strokeWidth={1.5}
+                  />
+                </div>
+                <h3 className="font-display text-2xl md:text-3xl font-light mb-2 text-[var(--ivory)]" style={{ letterSpacing: '-0.02em' }}>
+                  {f.t}
+                </h3>
+                <p className="text-sm text-[var(--muted)] leading-relaxed">{f.d}</p>
+              </motion.div>
             </motion.div>
           ))}
         </div>
