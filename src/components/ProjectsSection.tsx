@@ -1,9 +1,7 @@
-import { useState, Suspense } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { PROJECTS } from '../data/projects';
-import { Canvas } from '@react-three/fiber';
-import Projects3DStack from './canvas/Projects3DStack';
 
 export default function ProjectsSection() {
   const [active, setActive] = useState(0);
@@ -56,18 +54,26 @@ export default function ProjectsSection() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 1 }}
-          className="relative w-full aspect-[16/11] sm:aspect-[16/9] lg:aspect-[21/9] rounded-2xl overflow-hidden project-card-shadow group bg-black/20"
+          className="relative w-full aspect-[16/11] sm:aspect-[16/9] lg:aspect-[21/9] rounded-2xl overflow-hidden project-card-shadow group cursor-pointer"
+          onClick={() => open(current.slug)}
         >
-          <div className="absolute inset-0 z-0">
-            <Suspense fallback={<div className="w-full h-full flex items-center justify-center text-[var(--gold)]">Loading 3D Stack...</div>}>
-              <Canvas camera={{ position: [0, 0, 10], fov: 45 }}>
-                <Projects3DStack projects={PROJECTS} active={active} setActive={setActive} onOpen={open} />
-              </Canvas>
-            </Suspense>
-          </div>
+          {PROJECTS.map((p, i) => (
+            <motion.div
+              key={p.slug}
+              initial={false}
+              animate={{ opacity: active === i ? 1 : 0, scale: active === i ? 1 : 1.05 }}
+              transition={{ duration: 0.9, ease: [0.65, 0, 0.35, 1] }}
+              className="absolute inset-0"
+              style={{ pointerEvents: 'none' }}
+            >
+              <img src={p.cover} alt={p.name} className="w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/25 to-black/30" />
+              <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+            </motion.div>
+          ))}
 
           {/* Overlay info */}
-          <div className="absolute inset-0 p-6 md:p-10 lg:p-12 flex flex-col justify-between pointer-events-none z-10">
+          <div className="absolute inset-0 p-6 md:p-10 lg:p-12 flex flex-col justify-between pointer-events-none">
             <div className="flex items-start justify-between">
               <span className="liquid-glass px-3 py-1.5 rounded-full text-[10px] tracking-[0.25em] uppercase text-[var(--gold-soft)]">
                 {current.badge}

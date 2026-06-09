@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { motion, useInView, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { motion, useInView } from 'framer-motion';
 
 const STATS = [
   { value: 18, suffix: '+', label: 'Years of Trust', sub: 'Since 2007' },
@@ -33,66 +33,6 @@ function Counter({ to, suffix }: { to: number; suffix: string }) {
       {value.toLocaleString()}
       {suffix}
     </span>
-  );
-}
-
-function TiltCard({ stat, index }: { stat: any, index: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 20 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 20 });
-
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!ref.current) return;
-    const rect = ref.current.getBoundingClientRect();
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.7, delay: index * 0.1 }}
-      style={{
-        rotateX,
-        rotateY,
-        transformPerspective: 1000,
-        background: 'linear-gradient(155deg, rgba(40,29,13,0.5) 0%, rgba(24,18,10,0.55) 55%, rgba(17,12,6,0.6) 100%)',
-      }}
-      className="rounded-2xl p-8 md:p-10 border border-[rgba(201,161,74,0.18)] transition-colors duration-500 hover:border-[rgba(201,161,74,0.45)]"
-    >
-      <motion.div style={{ translateZ: 50 }}>
-        <div
-          className="font-display text-5xl md:text-6xl lg:text-7xl text-[var(--gold-soft)] mb-3 leading-none"
-          style={{ letterSpacing: '-0.04em' }}
-        >
-          <Counter to={stat.value} suffix={stat.suffix} />
-        </div>
-        <div className="text-sm md:text-base text-[var(--ivory)] font-medium">{stat.label}</div>
-        <div className="text-xs text-[var(--muted)] mt-1">{stat.sub}</div>
-      </motion.div>
-    </motion.div>
   );
 }
 
@@ -135,9 +75,29 @@ export default function StatsSection() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5" style={{ perspective: 1200 }}>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {STATS.map((stat, i) => (
-            <TiltCard key={stat.label} stat={stat} index={i} />
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-50px' }}
+              transition={{ duration: 0.7, delay: i * 0.1 }}
+              className="rounded-2xl p-8 md:p-10 border border-[rgba(201,161,74,0.18)] transition-all duration-500 hover:border-[rgba(201,161,74,0.45)] hover:-translate-y-1"
+              style={{
+                background:
+                  'linear-gradient(155deg, rgba(40,29,13,0.5) 0%, rgba(24,18,10,0.55) 55%, rgba(17,12,6,0.6) 100%)',
+              }}
+            >
+              <div
+                className="font-display text-5xl md:text-6xl lg:text-7xl text-[var(--gold-soft)] mb-3 leading-none"
+                style={{ letterSpacing: '-0.04em' }}
+              >
+                <Counter to={stat.value} suffix={stat.suffix} />
+              </div>
+              <div className="text-sm md:text-base text-[var(--ivory)] font-medium">{stat.label}</div>
+              <div className="text-xs text-[var(--muted)] mt-1">{stat.sub}</div>
+            </motion.div>
           ))}
         </div>
       </div>
